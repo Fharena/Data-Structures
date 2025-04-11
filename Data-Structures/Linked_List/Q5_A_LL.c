@@ -39,6 +39,7 @@ int removeNode(LinkedList *ll, int index);
 int main()
 {
 	int c, i;
+	c = 1;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -102,7 +103,29 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	ListNode *cur = ll ->head;
+	ListNode *result = resultFrontList ->head;
+	ListNode *resultBack = resultBackList ->head;
+	int resultindex = 0;
+	int resultBackindex = 0;
+	int cursize = ll->size;
+	if (cursize%2){
+		cursize= (cursize + 1)/2;
+	}
+	else
+	cursize= cursize/2;//cursize를 result의 마지막 인덱스로 쓸거임
+	while(cur!=NULL){//현재 포인터 있는동안은 루프 돔
+		if(resultindex<cursize){
+			insertNode(resultFrontList, resultindex, cur->item);
+			resultindex++;
+		}
+		else{
+			insertNode(resultBackList, resultBackindex, cur->item);
+			resultBackindex++;
+		}
+		cur = cur->next;
+		
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

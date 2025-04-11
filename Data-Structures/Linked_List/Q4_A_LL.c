@@ -86,7 +86,31 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	ListNode *cur = ll ->head; //링크드 리스트 헤드의 주소를 현재값에 선언
+	ListNode *insertp = ll ->head; //추가용 포인터
+	int curindex = 0;
+	int cnt=0;//정해진 횟수까지만 체크해야됨**
+	int insertindex = 0;
+	while(insertp != NULL){
+		insertp=insertp->next;
+		insertindex++; //처음에만 잡아주면 이후부턴 뒤의 반복문에서 같이 ++해주면 됨
+	}
+
+    while (cnt < insertindex) {
+        if (!(cur->item % 2)){//cur의 원소가 짝수면 1로 if를 true로 내부 집입 
+			insertNode(ll, insertindex, cur->item);
+			cur = cur->next;
+			removeNode(ll, curindex);
+			cnt++;
+			continue;
+
+		}
+        cur = cur->next;
+		cnt++;
+        curindex++;
+		if (curindex == insertindex) break;
+    }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
