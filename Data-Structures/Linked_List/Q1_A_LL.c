@@ -86,11 +86,22 @@ int main()
 	return 0;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////채울공간
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	ListNode *cur = ll ->head; //링크드 리스트 헤드의 주소를 현재값에 선언
+	ListNode *prev = NULL; //이전값은 비움
+	int index = 0;
+
+    while (cur != NULL && cur->item < item) {
+        if (cur->item == item) return -1; // 중복
+        prev = cur;
+        cur = cur->next;
+        index++;
+    }
+	insertNode(ll, index, item);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
