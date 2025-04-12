@@ -86,9 +86,29 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-int moveMaxToFront(ListNode **ptrHead)
+int moveMaxToFront(ListNode **ptrHead)//&(ll.head)이므로 이중포인터로 들어와야댐
 {
-    /* add your code here */
+	ListNode *ptrtemp;//
+    ListNode *cur = *ptrHead; //체크하면서 움직일 포인터,head가 가지고있는 주소 반환
+	ListNode *prev = *ptrHead; //이전꺼 체크할 prev랑 max 찾았을떄 prev 저장할 maxprev 필요
+	ListNode *maxprev = *ptrHead; 
+	ListNode *maxnode = *ptrHead;
+	while(cur != NULL){
+		if((cur->item) > maxnode->item){
+			maxprev = prev;
+			maxnode = cur;
+		}
+		prev=cur;
+		cur=cur->next;
+
+	}
+	if (maxnode == *ptrHead)
+    	return 0;
+	ptrtemp=maxnode->next;
+	maxnode->next=*ptrHead;
+	*ptrHead = maxnode;
+	maxprev->next=ptrtemp;
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////
