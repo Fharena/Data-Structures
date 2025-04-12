@@ -43,7 +43,7 @@ void removeAllItemsFromStack(Stack *s);
 void printList(LinkedList *ll);
 ListNode * findNode(LinkedList *ll, int index);
 int insertNode(LinkedList *ll, int index, int value);
-int removeNode(LinkedList *ll, int index);
+int removeNode(LinkedList *ll, int index);  //비었으면 -1 리턴
 void removeAllItems(LinkedList *ll);
 
 //////////////////////////// main() //////////////////////////////////////////////
@@ -113,12 +113,27 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+    ListNode *temp = ll->head;
+	while(temp != NULL){
+		push(s,temp->item);
+		temp = temp->next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	ListNode *cur = s->ll.head;
+	int i = 0;
+    while (cur != NULL) {
+		
+        if ((cur->item) % 2 == 0) {
+			cur = cur->next;
+            removeNode(&(s->ll), i); // 홀수면 삭제
+        } else {
+            i++;
+            cur = cur->next; // 다음 노드로
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
