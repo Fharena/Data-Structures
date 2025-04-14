@@ -177,7 +177,7 @@ BTNode *createTree()
         }
         else
         {
-            scanf("%c",&s);
+            scanf("%c",&s); //이거도 알면 좋음 stdin  버퍼 비워주는거임
         }
 
         printf("Enter an integer value for the Right child of %d: ", temp->item);
