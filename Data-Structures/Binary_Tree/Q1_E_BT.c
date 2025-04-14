@@ -113,10 +113,22 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int identical(BTNode *tree1, BTNode *tree2)
+int identical(BTNode *tree1, BTNode *tree2) //루트노드 부터 시작,재귀적으로 짜라?
 
 {
-   /* add your code here */
+    if (tree1 == NULL && tree2 == NULL)
+        return 1;
+
+    if (tree1 == NULL || tree2 == NULL)
+        return 0; 
+
+    if (tree1->item != tree2->item)
+        return 0; 
+
+    // 둘다 1나오면 리턴 1
+    return identical(tree1->left, tree2->left) &&
+           identical(tree1->right, tree2->right);
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +177,7 @@ BTNode *createTree()
         }
         else
         {
-            scanf("%c",&s);
+            scanf("%c",&s); //이거도 알면 좋음 stdin  버퍼 비워주는거임
         }
 
         printf("Enter an integer value for the Right child of %d: ", temp->item);

@@ -102,7 +102,13 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+	if (node == NULL) return 0;//0층 설정. 본인 아래층이 3 이상이면 GreatGrandchild 존재하므로 출력.
+    int curdep = 0;//현재 노드 층. 좌우 자식노드중 큰 값에 +1
+    int left=hasGreatGrandchild(node->left);
+    int right=hasGreatGrandchild(node->right);
+    curdep= (left > right ? left : right );
+    if(curdep >= 3) printf("%d\n",node->item);
+    return curdep+1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
