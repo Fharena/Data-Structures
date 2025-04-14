@@ -97,7 +97,12 @@ int main()
 int maxHeight(BTNode *node)
 
 {
-    /* add your code here */
+    if (node == NULL) return -1; //비었으면 -1 이러면 아예 비었을떈 -1반환하지만 맨 아래 층보다 1칸아래에서 -1반환함,그럼 0층 예외처리 안해도됨
+
+    int maxleft = maxHeight(node->left);
+    int maxright = maxHeight(node->right);
+    return (maxleft>maxright ? maxleft:maxright)+1;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
