@@ -91,7 +91,19 @@ int main()
 
 void preOrderIterative(BSTNode *root)
 {
-	 /* add your code here */
+	Stack s;
+	s.top =NULL;//초기화
+	if (root == NULL) return;
+	BSTNode *cur = root;
+	push(&s,cur);//처음에 루트 넣어주기.
+	while(!isEmpty(&s)){
+		cur= pop(&s); //현재 위치 포인터 바꿔주고, 현재노드(루트) 프린트, 이후 스택엔 print 할 순서 역순으로 스택 넣어주기.
+		printf("%d ", cur->item);
+		if(cur->right !=NULL)
+			push(&s,cur->right);
+		if(cur->left !=NULL)
+			push(&s,cur->left); //왼쪽부터 pop하면서 while 반복, 포인터가 NULL일때는 push 하면 안됨.
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

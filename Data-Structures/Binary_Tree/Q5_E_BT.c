@@ -107,11 +107,13 @@ void mirrorTree(BTNode *node)
 {
     if (node==NULL) return;
     else{
+        mirrorTree(node->left);//미러는 아래 있어야됨.
+        mirrorTree(node->right);
         BTNode *temp = node->left;
         node->left = node->right;
-        node->right = node->left;
-        mirrorTree(node->left);
-        mirrorTree(node->right);
+        node->right = temp;
+
+        
 
     }
 

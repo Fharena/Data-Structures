@@ -91,7 +91,35 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	//기본적으로 while문에서 left로 가야됨.
+	BSTNode *peeknode; //스택에서 가장 마지막에 둔 노드로, 이전노드 역할.
+	BSTNode *lastrightnode;
+	Stack s;
+	s.top =NULL;//초기화
+	if (root == NULL) return;
+	BSTNode *cur = root;
+	while (cur!=NULL || !isEmpty(&s))
+	{
+		if(cur!=NULL){
+			push(&s,cur);
+			cur = cur->left;
+		}
+		else{//왼쪽 끝에 도달했을때부터 pop 시작
+
+			peeknode = s.top->data;
+			if(peeknode->right != NULL && lastrightnode != peeknode->right){
+				cur=peeknode->right; 
+			}
+			else{
+				lastrightnode=pop(&s);//오른쪽 체크용
+				printf("%d ",lastrightnode->item);
+			}
+
+		}
+		
+
+	}
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////

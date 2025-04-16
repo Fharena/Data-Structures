@@ -54,6 +54,7 @@ int main()
 
 	printf("1: Insert an integer into the binary search tree;\n");
 	printf("2: Print the post-order traversal of the binary search tree;\n");
+	printf("3: Delete an integer into the binary search tree;\n");
 	printf("0: Quit;\n");
 
 
@@ -74,6 +75,12 @@ int main()
 			postOrderIterativeS2(root); // You need to code this function
 			printf("\n");
 			break;
+		case 3:
+			printf("Input an integer that you want to remove into the Binary Search Tree: ");
+			scanf("%d", &i);
+			postOrderIterativeS2(removeNodeFromTree(root, i));
+			printf("\n");
+			break;
 		case 0:
 			removeAll(&root);
 			break;
@@ -91,15 +98,72 @@ int main()
 
 void postOrderIterativeS2(BSTNode *root)
 {
-	 /* add your code here */
+	Stack s1; //자식 순서 맞출 스택
+	s1.top =NULL;//초기화
+	Stack s2; // 출력을 위해 순서 뒤집어줄 스택
+	s2.top =NULL;//초기화
+	BSTNode *cur;
+	push(&s1,root);
+	while (!isEmpty(&s1)){
+		cur=pop(&s1);
+		push(&s2,cur);
+		if(cur->left != NULL){
+			push(&s1,cur->left);
+		}
+		if(cur->right != NULL){
+			push(&s1,cur->right);
+		}
+	}
+	while(!isEmpty(&s2)){
+		cur=pop(&s2);
+		printf("%d ",cur->item);
+	}
 }
 
 /* Given a binary search tree and a key, this function
    deletes the key and returns the new root. Make recursive function. */
-BSTNode* removeNodeFromTree(BSTNode *root, int value)
-{
-	/* add your code here */
-}
+   BSTNode* removeNodeFromTree(BSTNode *root, int value)
+   {
+	   if (root == NULL) return NULL;
+	   if (value < root->item) {
+		   root->left = removeNodeFromTree(root->left, value);
+	   }
+	   else if (value > root->item) {
+		   root->right = removeNodeFromTree(root->right, value);
+	   }
+	   else {//값 일치할경우
+		   if (root->left == NULL && root->right == NULL) {//자식 없음
+			   free(root);
+			   return NULL;
+		   }
+		   else if (root->left == NULL) {// 자식 하나
+			   BSTNode *temp = root->right;
+			   free(root);
+			   return temp;
+		   }
+		   else if (root->right == NULL) {
+			   BSTNode *temp = root->left;
+			   free(root);
+			   return temp;
+		   }
+   
+
+		   else {//자식 둘
+			   BSTNode *temp = root->right;//루트보다 큰것중에
+			   while (temp->left != NULL)
+			   		temp = temp->left;//가장 작은,
+   
+			   // 값만 복사 하고
+			   root->item = temp->item;
+   
+			   // 실제 중복된 값 삭제
+			   root->right = removeNodeFromTree(root->right, temp->item);
+		   }
+	   }
+   
+	   return root;
+   }
+   
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value){

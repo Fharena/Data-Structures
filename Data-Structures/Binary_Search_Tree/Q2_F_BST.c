@@ -90,7 +90,24 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	//스택에 우, cur, 좌 순으로 넣으면 됨
+	if (root==NULL) return ;
+	Stack s;
+	BSTNode *cur = root;
+
+	s.top =NULL;
+	while(cur!=NULL  || !isEmpty(&s)){
+		while(cur!=NULL){
+			push(&s,cur);
+			cur=cur->left;
+			
+		}
+		
+		cur=pop(&s);
+		printf("%d ", cur->item);
+		cur = cur->right;//왼쪽부터 쭈욱 스택에 넣고 맨 아래층 자손 만나면? 팝하면서 프린트하고 오른쪽 탐색.DFS의 스택버전 느낌.
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
